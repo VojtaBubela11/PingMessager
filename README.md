@@ -7,6 +7,9 @@ If you want to restructure the codebase in any way and submit it as a PR, please
 # Notes
 This bot was originally built to be a Private Bot for PenguinMod's Discord Server. If you have any issues relating to server, role, member, or channel specific features not working, this is likely why.
 
+You can edit most of these Discord-specific features in the `src/util/utility.js` file or `src/events/client` folder.
+Most other things will just be command-specific checks or custom emojis being used.
+
 The bot uses many assets that cannot be released inside of this repo.
 
 You can find them here:
@@ -35,6 +38,9 @@ The `assets` folder is **NOT** under this license. Content in there may be licen
 8. Run the bot with `npm run test` for development and `npm start` or `node permrun.js` for production.
     - If you want to run the bot once in development, use `node src/index.js test`. This is not recommended for production as the bot can be restarted via commands.
     - When the bot is online, you can use the `restart` command in Discord to restart the bot.
+
+Note that there is no `.env` variables or config to change many of the server-specific features in the current version of PenguinBot.
+Check the Notes section for details.
 
 # Basic Commands Template
 ```js

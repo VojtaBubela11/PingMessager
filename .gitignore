@@ -1,0 +1,43 @@
+# generic
+.env
+node_modules
+
+# public version omissions
+assets/*
+src/commands/event/*
+src/commands/secrets/*
+src/events/client/guildBanAdd.js
+src/modules/cloudlink-client.js
+src/util/aprilfools.js
+src/util/freearttranslator.js
+src/util/gamejam-themegen.js
+
+# runtime folders
+cache/*
+databases/*
+memes/*
+temp/*
+
+## probably old runtime folders?
+data/*
+build/*
+
+# scratchblocks clutter
+scratchblocks/*.pyc
+scratchblocks/*.swp
+scratchblocks/.DS_Store
+scratchblocks/build/
+scratchblocks/node_modules
+scratchblocks/package-lock.json
+scratchblocks/npm-debug.log
+scratchblocks/src/_cache
+scratchblocks/tests/*.svg
+
+# misc, really just dump whatever you want here
+src/config.js
+homework/*
+Thumbs.db
+spoonfeederPings.json
+aaa_eval_stuff.txt
+dump.txt
+scripts/*.bat
