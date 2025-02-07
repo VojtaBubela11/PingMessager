@@ -7,6 +7,8 @@ node_modules
 assets/*
 src/commands/event/*
 src/commands/secrets/*
+src/basecommands/event/*
+src/basecommands/secrets/*
 
 ## non-command stuff
 src/events/client/guildBanAdd.js

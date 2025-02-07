@@ -16,7 +16,7 @@ Most other things will just be command-specific checks or custom emojis being us
 The bot uses many assets that cannot be released inside of this repo.
 
 You can find them here:
-https://drive.google.com/file/d/1ERrESIcINxj4AOZT9-DLqsd1MrFEKFDc/view?usp=sharing
+https://drive.google.com/file/d/1BXZ7xYmnWFsVJ9B6OiyqLNihJNyZ9Yxv/view?usp=sharing
 
 Note that **fonts are not included** in this download.
 
@@ -29,6 +29,9 @@ Please let us know if this is incorrect or invalid.
 The `assets` folder is **NOT** under this license. Content in there may be licensed under, literally anything.
 
 # Setup
+**Please CLONE this repository properly with Git, do not download it as a ZIP.**
+If you do not do this, many commands relating to managing the GitHub repository will cause undefined behavior.
+
 1. Install Node.js, preferably v18 or v20
 2. Install FFMPEG. Easiest way to check if it's setup properly is to run `ffmpeg` in a terminal with no arguments.
 3. Install Git
