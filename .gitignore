@@ -3,14 +3,21 @@
 node_modules
 
 # public version omissions
+## full folders
 assets/*
 src/commands/event/*
 src/commands/secrets/*
+
+## non-command stuff
 src/events/client/guildBanAdd.js
 src/modules/cloudlink-client.js
 src/util/aprilfools.js
+
+## commands & command modules
 src/util/freearttranslator.js
 src/util/gamejam-themegen.js
+src/commands/gameidea.js
+src/commands/textmodifier/joyous.js
 
 # runtime folders
 cache/*
