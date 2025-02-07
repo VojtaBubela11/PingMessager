@@ -5,10 +5,10 @@ Certain features or commands may be missing from this repository.
 If you want to restructure the codebase in any way and submit it as a PR, please note we may be very strict about it since we will have to make all of our future contributions under the format of your changes. Ideally, don't mess with how commands are defined but it's cool if you move around folders, modules, classes, or functions & such to reduce clutter.
 
 # Notes
-This bot was originally built to be a Private Bot for PenguinMod's Discord Server. If you have any issues relating to server, role, member, or channel specific features not working, this is likely why.
-
 Discord is a much more casual & non-serious place for people to chat in our view.
 If you see swear words or immature jokes in the source of PenguinBot, this is why. Sorry about that, don't put this code on your resume. :P
+
+This bot was originally built to be a Private Bot for PenguinMod's Discord Server. If you have any issues relating to server, role, member, or channel specific features not working, this is likely why.
 
 You can edit most of these Discord-specific features in the `src/util/utility.js` file or `src/events/client` folder.
 Most other things will just be command-specific checks or custom emojis being used.
