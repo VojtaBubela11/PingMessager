@@ -7,6 +7,9 @@ If you want to restructure the codebase in any way and submit it as a PR, please
 # Notes
 This bot was originally built to be a Private Bot for PenguinMod's Discord Server. If you have any issues relating to server, role, member, or channel specific features not working, this is likely why.
 
+Discord is a much more casual & non-serious place for people to chat in our view.
+If you see swear words or immature jokes in the source of PenguinBot, this is why. Sorry about that, don't put this code on your resume. :P
+
 You can edit most of these Discord-specific features in the `src/util/utility.js` file or `src/events/client` folder.
 Most other things will just be command-specific checks or custom emojis being used.
 
