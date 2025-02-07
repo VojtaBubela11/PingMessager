@@ -18,6 +18,7 @@ src/util/freearttranslator.js
 src/util/gamejam-themegen.js
 src/commands/gameidea.js
 src/commands/textmodifier/joyous.js
+src/commands/dev/penguinbotupload.js
 
 # runtime folders
 cache/*
