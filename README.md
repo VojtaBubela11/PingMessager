@@ -35,8 +35,8 @@ If you do not do this, many commands relating to managing the GitHub repository 
 1. Install Node.js, preferably v18 or v20
 2. Install FFMPEG. Easiest way to check if it's setup properly is to run `ffmpeg` in a terminal with no arguments.
 3. Install Git
-4. Download the `assets` folder in the link found in the Notes section.
-5. Create a `cache`, `databases`, `temp`, and `memes` folder in this folder. (the root folder for PenguinBot basically)
+4. Create a `cache`, `databases`, `temp`, and `memes` folder in this folder. (the root folder for PenguinBot basically)
+5. Download the `assets` folder in the link found in the Notes section, and put it in the root folder for PenguinBot.
 6. Install all of the node modules with `npm i --force` (package conflicts are not resolved yet)
     - If you have `nvm` installed to switch between Node installations, you may need to rebuild canvas every now and then with `npm rebuild canvas`
 7. Duplicate `.env.template` and rename it to `.env`, then fill any of the information you can.
