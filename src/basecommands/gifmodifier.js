@@ -7,14 +7,6 @@ const path = require('path');
 const { uuid } = require('uuidv4');
 const runNewThread = require('../util/multi-thread');
 
-const getAttachmentType = (attachment) => {
-    try {
-        return attachment.contentType.split(';')[0].split('/')[1];
-    } catch {
-        return;
-    }
-};
-
 class Command {
     // This class shouldnt do anything really in constructor,
     // as a new instance will be made each time the "Editing GIF" thread is made.
@@ -61,7 +53,7 @@ class Command {
                 }
             } else {
                 const attachment = message.attachments.first();
-                const endingType = getAttachmentType(attachment);
+                const endingType = util.getAttachmentType(attachment);
                 usingGif = endingType === "gif";
                 
                 if ((usingGif && !isDonator) || (!supportedTypes.includes(endingType))) {

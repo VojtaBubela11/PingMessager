@@ -14,13 +14,6 @@ const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
-const getAttachmentType = (attachment) => {
-    try {
-        return attachment.contentType.split(';')[0].split('/')[1];
-    } catch {
-        return;
-    }
-};
 const getVideoProperties = (video) => {
     return new Promise((resolve, reject) => {
         video.ffprobe((err, metadata) => {
@@ -79,7 +72,7 @@ class Command {
                 }
             } else {
                 const attachment = message.attachments.first();
-                const endingType = getAttachmentType(attachment);
+                const endingType = util.getAttachmentType(attachment);
                 const usingGif = endingType === "gif";
 
                 if (!supportedTypes.includes(endingType)) {

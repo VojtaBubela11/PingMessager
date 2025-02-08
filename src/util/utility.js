@@ -39,6 +39,87 @@ class CommandUtility {
             });
         });
     }
+    static getAttachmentType(attachment) {
+        try {
+            return attachment.contentType.split(';')[0].split('/')[1];
+        } catch {
+            return;
+        }
+    };
+    static getInputImageForCommand(message, allowBlocking, allowGif) {
+        // this func should return [imageUrl?, usingGif?]
+        let usingGif = false;
+
+        // NOTE: We should allow all of the file types that Jimp and Canvas can support.
+        const supportedTypes = ['png', 'jpeg', 'jpg'];
+        if (allowGif) {
+            supportedTypes.push('gif');
+        }
+
+        const isDonator = this.isFromExclusive(message);
+        const supportedFileTypeMessage = `Please use a valid image in one of these formats: \`${supportedTypes.join("`, `")}\``;
+
+        if (message.attachments.size <= 0) {
+            let imageUrl = null;
+            imageUrl = message.author.displayAvatarURL({ format: 'png', size: 256 });
+
+            // Check if a user is mentioned in the args
+            const mention = message.mentions.users.first();
+            if (this.interactionsBlocked(mention) && mention.id !== message.author.id) {
+                if (allowBlocking) {
+                    message.reply('The user you mentioned has interactions disabled.');
+                    return [false];
+                }
+                return [];
+            } else if (mention) {
+                imageUrl = mention.displayAvatarURL({ format: 'png', size: 256 });
+            }
+
+            return [imageUrl, false];
+        } else {
+            const attachment = message.attachments.first();
+            const endingType = this.getAttachmentType(attachment);
+            usingGif = endingType === "gif";
+
+            if ((usingGif && !isDonator) || (!supportedTypes.includes(endingType))) {
+                if (allowBlocking) {
+                    if (allowGif) {
+                        message.reply(`${supportedFileTypeMessage}\nOnly Donators can use \`.gif\` images with this command.`);
+                    } else {
+                        message.reply(supportedFileTypeMessage);
+                    }
+                    return [false];
+                }
+                return [];
+            }
+
+            if (!isDonator && attachment.size > 512000) {
+                if (allowBlocking) {
+                    message.reply("Non-donators or server boosters must use images below 512 KB.\nTry [resizing your image.](<https://ezgif.com/resize>)");
+                    return [false];
+                }
+                return [];
+            }
+
+            if (isDonator && !usingGif && attachment.size > 1e+6) {
+                if (allowBlocking) {
+                    message.reply("Images must be below 1 MB.\nTry [resizing your image.](<https://ezgif.com/resize>)");
+                    return [false];
+                }
+                return [];
+            }
+            if (isDonator && usingGif && attachment.size > 2e+6) {
+                if (allowBlocking) {
+                    message.reply("GIFs must be below 2 MB.\nTry [resizing your gif](<https://ezgif.com/resize>) or [optimizing it.](<https://ezgif.com/optimize>)");
+                    return [false];
+                }
+                return [];
+            }
+
+            return [attachment.url, usingGif];
+        }
+    }
+
     static interactionsBlocked(userOrId) {
         if (!userOrId) return false;
         let id = userOrId;
