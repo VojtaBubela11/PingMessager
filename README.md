@@ -32,7 +32,7 @@ The `assets` folder is **NOT** under this license. Content in there may be licen
 **Please CLONE this repository properly with Git, do not download it as a ZIP.**
 If you do not do this, many commands relating to managing the GitHub repository will cause undefined behavior.
 
-1. Install Node.js, preferably v18 or v20
+1. Install Node.js, preferably v18 or v20. **Newer versions of Node may not be compatible out of the box with Canvas or other modules yet.**
 2. Install FFMPEG. Easiest way to check if it's setup properly is to run `ffmpeg` in a terminal with no arguments.
 3. Install Git
 4. Create a `cache`, `databases`, `temp`, and `memes` folder in this folder. (the root folder for PenguinBot basically)
