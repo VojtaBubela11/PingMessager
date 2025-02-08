@@ -1,5 +1,5 @@
 const { createCanvas, loadImage } = require('canvas');
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 const Discord = require('discord.js');
 
 class Command {

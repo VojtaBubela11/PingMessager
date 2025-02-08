@@ -1,6 +1,6 @@
 const { MessageAttachment, Message } = require('discord.js');
 const Canvas = require('canvas');
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 
 const rarities = [
     {

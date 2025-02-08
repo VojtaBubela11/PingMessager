@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 const Jimp = require('jimp');
 
 class Command {

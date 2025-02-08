@@ -1,5 +1,5 @@
 const discord = require("discord.js");
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 const jimp = require('jimp');
 
 const listedToppings = [ // visual only for listings, validToppings includes actually usable toppings

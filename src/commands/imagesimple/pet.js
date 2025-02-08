@@ -1,6 +1,6 @@
 const petPetGif = require('pet-pet-gif');
 const Discord = require("discord.js");
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 
 class Command {
     constructor() {

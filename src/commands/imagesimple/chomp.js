@@ -1,7 +1,7 @@
 const { createCanvas, loadImage } = require('canvas'); // best when dealing with text & shapes
 const jimp = require('jimp'); // best for adding effects to images & dealing with transparency
 const Discord = require("discord.js");
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 
 const chompImages = {};
 const loadImages = async () => {

@@ -1,6 +1,6 @@
 const { MessageAttachment, MessageEmbed } = require('discord.js');
 const { createCanvas, loadImage, registerFont } = require('canvas');
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 const jimp = require('jimp');
 
 class Command {

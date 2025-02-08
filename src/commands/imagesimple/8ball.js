@@ -1,6 +1,6 @@
 const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
-const OptionType = require('../util/optiontype');
+const OptionType = require('../../util/optiontype');
 
 class Command {
     constructor() {
