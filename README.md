@@ -16,7 +16,7 @@ Most other things will just be command-specific checks or custom emojis being us
 The bot uses many assets that cannot be released inside of this repo.
 
 You can find them here:
-https://drive.google.com/file/d/1BXZ7xYmnWFsVJ9B6OiyqLNihJNyZ9Yxv/view?usp=sharing
+https://drive.google.com/file/d/1TwvCSmPvxthxB1taJ4c-1wrxhgVhLEl1/view?usp=sharing
 
 Note that **fonts are not included** in this download.
 
