@@ -170,7 +170,7 @@ class Command extends GifModifierCommand {
             repeatCount = 12 - numFrames;
 
             for (let i = 0; i < image.frames.length; i++) {
-                if (i > 99) break; // if the gif is 100+ frames, just dont render more than 100 frames
+                if (i > 191) break; // if the gif is 192+ frames, just dont render more than 192 frames
 
                 const frame = image.frames[i];
                 const frameInfo = image.reader.frameInfo(i);
