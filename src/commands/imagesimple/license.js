@@ -36,11 +36,11 @@ class LicenseCommand {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             return characters.charAt(Math.floor(Math.random() * characters.length));
         }
-        
+
+        const licenseText = args.join(" ").replace(/\n/g, ' ');
         ctx.font = 'bold 30px Helvetica Neue Medium'; // Set font size, type, and weight
         ctx.fillStyle = '#000000'; // Set text color
         ctx.textAlign = 'center'; // Center the text horizontally
-        const licenseText = args.join(" ").replace(/\n/g, ' ');
         ctx.fillText(licenseText, canvas.width / 2, 45, 475); // Draw the text at y-coordinate 35
 
         // Add additional text lines manually
