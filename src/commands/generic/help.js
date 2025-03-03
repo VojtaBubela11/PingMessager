@@ -34,7 +34,7 @@ class Command {
         const text = [];
         let commandCount = 0;
         let lastCommandName = "";
-        for (const commandName in commands) {
+        for (const commandName of Object.keys(commands).sort()) {
             const command = commands[commandName];
             // remove alias commands
             if (command.name === lastCommandName) {
