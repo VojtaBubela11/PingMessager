@@ -3,47 +3,35 @@ const env = require("./util/env-util");
 // Seperated from .env since these are mostly cosmetic changes or big lists.
 const configuration = {
     // Used in cases like "Welcome to the {NAME} server!" and "Do not post NSFW invites in the {NAME} server."
-    nameReference: "PenguinMod",
+    nameReference: "Sprunki Pyramixed",
 
     // The bot has many auto responses, toggled using the RESPOND_TO_KEYWORDS env. They will only be usable in these channels:
     autoResponseChannels: [
-        // These are the channels used in PenguinMod's server:
+        // These are the channels used in pyramix's server:
         // dont include things like bug reports or suggestions
-        '1038238583686967428', // penguin-chat
-        '1161202733269930075', // vip-chat
-        '1052023660594081862', // projects
-        '1038236110335266907', // off-topic
-        '1038251459843723274', // commands
-        '1038261660164563044', // old-secret-penguin-chat
-        '1161439112096665711', // one-minute-and-37-seconds
-        '1139749855913316474', // penguinbot-test
+        '1361858381802901667', // general
+        '1361878790363680849', // commands
+        '1368994959277035633', // server-test
     ],
 
     // Used to link to channels within the server. These IDs are the ones we use in PenguinMod.
     channels: {
         // A channel for PenguinBot testing and occasional logging.
-        botTestingChannel: "1139749855913316474",
+        botTestingChannel: "1368994959277035633",
 
         // A channel dedicated to bot commands.
-        commands: "1038251459843723274",
+        commands: "1361878790363680849",
 
         // A channel dedicated to bot commands for developers.
-        commandsDev: "1174359501688803358",
+        commandsDev: "1368995128018079775",
 
         // The channel where blocked automod alerts are sent. PenguinBot will send automod bypass alerts here too, if the basic_automod file is added.
         // See src/util/utility.js to see where basic_automod is used.
-        automod: "1335746419193151598",
-
-        // A channel where PenguinBot can send reported users to. Usable via /report
-        userReports: "1174360726765305987",
-
-        // A channel where PenguinBot can send reported mods to. Usable via /modreport
-        adminReports: "1214727525607936020",
-
-        help: "1090809014343974972",
-        spaces: "1181097377730400287",
-        teamWanted: "1095867529169207416",
-        spam: "1040077506029551647",
+        automod: "1368995390808133746",
+//        help: "1090809014343974972",
+//        spaces: "1181097377730400287",
+//        teamWanted: "1095867529169207416",
+//        spam: "1040077506029551647",
     },
 
     permissions: {
@@ -69,19 +57,6 @@ const configuration = {
         exclusiveRoles: [
             "1150383694842953778", // Donator
             "1102050296265445436", // Server Booster
-        ],
-
-        // Channels checked for in the lockedToCommands property (excluding commands channel from above & threads within that channel)
-        lockedToCommands: [
-            // These are the channels allowed in PenguinMod's server:
-            '1143305846227476511', // dev-github-logs
-            '1038251742439149661', // dev-chat
-            '1139749855913316474', // penguinbot-test
-            '1146290116583751681', // web-mod-chat
-            '1038252107846930513', // server-mod-chat
-            '1176024649390366780', // admin-chat
-            '1176024748300443698', // admin-furry-rp
-            '1126699478607470652', // mod-furry-rp
         ],
 
         // On top of the permission check, who can use pm!eval (run custom code)
