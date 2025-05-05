@@ -258,7 +258,7 @@ class Command {
 
         // mix names
         let mixedName = mixNames(u1, u2);
-        if (!util.automodAllows(mixedName)) { // one guy is named "nice" the other is named "lotbigger"
+        if (!util.automodAllows(mixedName, true)) { // one guy is named "nice" the other is named "lotbigger"
             mixedName = stringAddNames(u1, u2);
         }
 

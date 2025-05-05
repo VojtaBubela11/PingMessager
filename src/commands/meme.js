@@ -1,9 +1,10 @@
-const { MessageEmbed, MessageAttachment } = require("discord.js");
-const OptionType = require('../util/optiontype');
+const fs = require('fs');
 const path = require('path');
 const axios = require('axios')
 
-const fs = require('fs');
+const { MessageEmbed, MessageAttachment } = require("discord.js");
+const OptionType = require('../util/optiontype');
+const configuration = require("../config");
 
 const memesFolder = path.join(__dirname, '../../memes');
 
@@ -139,7 +140,7 @@ class Command {
     }
 
     async invoke(message, args) {
-        const isDevChannel = message.channel.id === '1139749855913316474';
+        const isDevChannel = message.channel.id === configuration.channels.botTestingChannel;
         switch (args[0] ?? 'random') {
         case 'submit':
             await this.submit(message)

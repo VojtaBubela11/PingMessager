@@ -4,16 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-require('dotenv').config();
-
-const getBoolEnv = (env) => {
-    const value = process.env[env];
-    return String(value) === 'true';
-};
-const getNumberEnv = (env) => {
-    const value = process.env[env];
-    return Number(value);
-};
+const env = require("../../util/env-util");
 
 class BotEvent {
     constructor(client) {
@@ -24,11 +15,11 @@ class BotEvent {
     }
 
     async invoke(client, state) {
-        if (!getBoolEnv("WEB_PANEL_ENABLED")) return;
+        if (!env.getBool("WEB_PANEL_ENABLED")) return;
         
         const handleDoAction = require('../../admin/server');
         
-        const port = getNumberEnv("WEB_PANEL_PORT");
+        const port = env.getNumber("WEB_PANEL_PORT");
         console.log("Attempting to setup Web Panel...");
         console.log("Running in", __dirname);
 

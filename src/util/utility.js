@@ -1,7 +1,12 @@
 const Database = require('./easy-json-database');
 const DisabledInteractionsDB = new Database('./databases/disabled-interactions.json');
 
-const automodKeywords = require('../resources/basic_automod');
+const tryCatch = require('./try-catch');
+const bypass = require("./bypass-characters");
+const configuration = require("../config");
+const env = require('./env-util');
+
+const automodKeywords = tryCatch(() => require('../resources/basic_automod')) || [];
 
 /**
  * @classdesc Meant to be a helper for common discord-related functions.
@@ -16,14 +21,13 @@ class CommandUtility {
     }
 
     static getPermissionLevel(message) {
-        if (message.member._roles.includes('1038234739708006481') || message.member._roles.includes('1081053191602450552')) return 3; // developers
-        if (message.member._roles.includes('1161720252913168474') || message.member._roles.includes('1173376969900052492')) return 2; // mods
-        if (message.member._roles.includes('1170911460948451438')) return 1; // mubi (bleh)
+        if (message.member._roles.some(v => configuration.permissions.permission3.includes(v))) return 3; // developers
+        if (message.member._roles.some(v => configuration.permissions.permission2.includes(v))) return 2; // mods
+        if (message.member._roles.some(v => configuration.permissions.permission1.includes(v))) return 1; // bot dev
         return 0;
     }
     static isFromExclusive(message) {
-        const isExclusive = message.member._roles.includes('1150383694842953778') // donator
-            || message.member._roles.includes('1102050296265445436'); // server booster
+        const isExclusive = message.member._roles.some(v => configuration.permissions.exclusiveRoles.includes(v));
         return isExclusive;
     }
 
@@ -131,16 +135,28 @@ class CommandUtility {
         return isBlocked === true;
     }
 
-    static automodAllows(text) {
+    static automodAllows(text, optCheckBypass, optReturnWord) {
         text = String(text)
             .toLowerCase()
             .replaceAll(' ', '')
             .replaceAll('\n', '')
             .replaceAll('\r', '');
+
+        if (optCheckBypass) {
+            text = text.split("").map(bypass.getRealCharacter).join("");
+        }
+
         for (const keyword of automodKeywords) {
             if (text.includes(keyword)) {
+                if (optReturnWord) {
+                    return keyword;
+                }
                 return false;
             }
+        }
+
+        if (optReturnWord) {
+            return;
         }
         return true;
     }
@@ -202,8 +218,8 @@ class CommandUtility {
             return true;
         }
         if (command.attributes.exclusive === true) {
-            let canBeUsed = message.author.id === '462098932571308033';
-            if (message.guild && message.guild.id === '1033551490331197462') {
+            let canBeUsed = configuration.permissions.exclusiveUsers.includes(message.author.id);
+            if (message.guild && message.guild.id === env.get("SERVER_ID")) {
                 canBeUsed = canBeUsed || this.isFromExclusive(message);
             }
             // lmao
@@ -227,20 +243,13 @@ class CommandUtility {
         if (command.attributes.lockedToCommands === true) {
             // check which channel we are in
             let canBeUsed = true;
-            if (message.guild && message.guild.id === '1033551490331197462') { // i have a test server so
-                canBeUsed = message.channel.id === '1038251459843723274' // commands
-                    || message.channel.parentId === '1038251459843723274' // in a thread in commands
-                    || message.channel.id === '1174359501688803358' // dev-commands
-                    || message.channel.parentId === '1174359501688803358' // in a thread in dev-commands
-                    // private chats cause those are chill and dont need to be worried about
-                    || message.channel.id === '1143305846227476511' // dev-github-logs
-                    || message.channel.id === '1038251742439149661' // dev-chat
-                    || message.channel.id === '1139749855913316474' // penguinbot-test
-                    || message.channel.id === '1146290116583751681' // web-mod-chat
-                    || message.channel.id === '1038252107846930513' // server-mod-chat
-                    || message.channel.id === '1176024649390366780' // admin-chat
-                    || message.channel.id === '1176024748300443698' // admin-furry-rp
-                    || message.channel.id === '1126699478607470652';// mod-furry-rp
+            if (message.guild && (message.guild.id === env.get("SERVER_ID")
+                || (env.getBool("CHECK_FOR_DEFAULT_TEST_SERVERS") && message.guild.id === "746156168560508950"))) { // i have a test server so
+                canBeUsed = message.channel.id === configuration.channels.commands // commands
+                    || message.channel.parentId === configuration.channels.commands // in a thread in commands
+                    || message.channel.id === configuration.channels.commandsDev // dev-commands
+                    || message.channel.parentId === configuration.channels.commandsDev // in a thread in dev-commands
+                    || configuration.permissions.lockedToCommands.includes(message.channel.id);
                 if (command.attributes.unlockedChannels) {
                     // there are other conditions here
                     canBeUsed = canBeUsed
@@ -249,16 +258,17 @@ class CommandUtility {
                 }
             }
             if (!canBeUsed) {
-                this._commandBlockReject(command, message, split, "This command can only be used in <#1038251459843723274>.");
+                this._commandBlockReject(command, message, split, `This command can only be used in <#${configuration.channels.commands}>.`);
                 return true;
             }
         }
         if (command.attributes.lockedToHelp) {
             // check which channel we are in
             let canBeUsed = true;
-            if (message.guild && message.guild.id === '1033551490331197462') { // jeremy has a test server ig
-                canBeUsed = message.channel.parent.id === '1090809014343974972' // help
-                    || message.channel.id === '1139749855913316474'; // penguinbot-test
+            if (message.guild && (message.guild.id === env.get("SERVER_ID")
+                || (env.getBool("CHECK_FOR_DEFAULT_TEST_SERVERS") && message.guild.id === "746156168560508950"))) {
+                canBeUsed = message.channel.parent.id === configuration.channels.help // help
+                    || message.channel.id === configuration.channels.botTestingChannel; // penguinbot-test
                 if (command.attributes.unlockedChannels) {
                     // there are other conditions here
                     canBeUsed = canBeUsed
@@ -267,7 +277,7 @@ class CommandUtility {
                 }
             }
             if (!canBeUsed) {
-                this._commandBlockReject(command, message, split, "This command can only be used in <#1090809014343974972>.");
+                this._commandBlockReject(command, message, split, `This command can only be used in <#${configuration.channels.help}>.`);
                 return true;
             }
         }
@@ -275,13 +285,13 @@ class CommandUtility {
             // this command is locked to #spaces forum & the post's owner
             let canBeUsed = false;
             if (
-                message.channel.parentId === '1181097377730400287'
+                message.channel.parentId === configuration.channels.spaces
                 && message.channel.ownerId === message.author.id
             ) {
                 canBeUsed = true;
             }
             if (!canBeUsed) {
-                this._commandBlockReject(command, message, split, "This command can only be used in <#1181097377730400287> that you have created.");
+                this._commandBlockReject(command, message, split, `This command can only be used in <#${configuration.channels.spaces}> that you have created.`);
                 return true;
             }
         }

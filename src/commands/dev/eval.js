@@ -1,3 +1,5 @@
+const configuration = require("../../config");
+
 class Command {
     constructor(client) {
         this.name = "eval";
@@ -18,7 +20,7 @@ class Command {
     }
 
     run(message, args, util) {
-        if (message.author.id !== process.env.OWNER && message.author.id !== "462098932571308033") {
+        if (!configuration.permissions.eval.includes(message.author.id)) {
             this.reject(message);
             return;
         }

@@ -1,6 +1,8 @@
 const synchronizeSlashCommands = require('@frostzzone/discord-sync-commands');
 const glob = require("glob");
 
+const configuration = require("../../config");
+
 class BotEvent {
     constructor(client) {
         this.listener = "ready";
@@ -89,7 +91,7 @@ class BotEvent {
         });
 
         // log
-        const mainChannel = await client.channels.cache.get('1139749855913316474');
+        const mainChannel = await client.channels.cache.get(configuration.channels.botTestingChannel);
         mainChannel.send({
             content: isInTestMode ?
                 'Bot has restarted in test mode. Certain features will not be enabled.' :

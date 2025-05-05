@@ -21,7 +21,6 @@ src/util/gamejam-themegen.js
 src/resources/basic_automod.js
 src/commands/gameidea.js
 src/commands/textmodifier/joyous.js
-src/commands/dev/penguinbotupload.js
 
 # runtime folders
 cache/*
@@ -45,7 +44,6 @@ scratchblocks/src/_cache
 scratchblocks/tests/*.svg
 
 # misc, really just dump whatever you want here
-src/config.js
 homework/*
 Thumbs.db
 spoonfeederPings.json

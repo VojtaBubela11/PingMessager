@@ -1,4 +1,5 @@
 const OptionType = require('../../util/optiontype');
+const configuration = require("../../config");
 
 class Command {
     constructor(client) {
@@ -29,8 +30,8 @@ class Command {
             }, {
                 type: OptionType.ATTACHMENT,
                 name: 'image1',
-                required: false,
-                description: '(Optional) A screenshot to include.'
+                required: true,
+                description: 'A screenshot to include.'
             }, {
                 type: OptionType.ATTACHMENT,
                 name: 'image2',
@@ -67,12 +68,10 @@ class Command {
             });
         }
 
-        const adminReportChannel = this.client.channels.cache.get('1214727525607936020');
+        const adminReportChannel = this.client.channels.cache.get(configuration.channels.adminReports);
         const moderator = message.options.getMember('moderator');
-        const isMod = moderator._roles.includes('1038234739708006481') // developer
-            || moderator._roles.includes('1081053191602450552') // retired dev
-            || moderator._roles.includes('1161720252913168474') // discord mods
-            || moderator._roles.includes('1173376969900052492'); // trial mod
+        const isMod = moderator._roles.some(v => configuration.permissions.permission3.includes(v)) // developer
+            || moderator._roles.some(v => configuration.permissions.permission2.includes(v)); // mod
         if (!isMod) return message.reply({
             content: 'Please select a moderator, not a regular user.',
             ephemeral: true,

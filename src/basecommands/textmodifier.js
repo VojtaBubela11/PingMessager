@@ -47,7 +47,7 @@ class TextModifierCommand {
     }
 
     async invoke(message, args, util) {
-        if (!util.automodAllows(message)) { // dont allow bad shit
+        if (!util.automodAllows(message, true)) { // dont allow bad shit
             return message.reply("nuh uh");
         }
 
@@ -69,7 +69,7 @@ class TextModifierCommand {
         }
         uwuText = String(uwuText);
 
-        if (!util.automodAllows(uwuText)) { // dont allow bad shit
+        if (!util.automodAllows(uwuText, true)) { // dont allow bad shit
             return message.reply("nuh uh");
         }
 

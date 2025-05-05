@@ -29,7 +29,6 @@ class Command {
     }
 
     handleProjectResponse(message, project) {
-        // todo: run "notfound" if the author is not the message author (requires account linking)
         if (project === 'notfound') {
             return message.reply('No such project was found. Please ensure you typed it correctly.');
         }

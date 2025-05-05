@@ -1,6 +1,8 @@
-const { Message, MessageEmbed, GuildEmoji } = require('discord.js');
 const Database = require('../../util/easy-json-database');
 const DonatorRoleDB = new Database('./databases/donator-roles.json');
+
+const { Message, MessageEmbed, GuildEmoji } = require('discord.js');
+const configuration = require("../../config");
 const fetch = require("node-fetch");
 
 class Command {
@@ -21,8 +23,9 @@ class Command {
      * @param {Array} args 
      */
     async invoke(message, args) {
-        let canUseForce = message.author.id === '462098932571308033';
+        let canUseForce = configuration.permissions.exclusiveroleForce.includes(message.author.id);
         if (!args[0]) return message.reply('Please provide a subcommand: `create | get | delete | fix | name | color | icon`');
+        
         const subcommand = args.shift();
         switch (subcommand) {
             case 'create': {

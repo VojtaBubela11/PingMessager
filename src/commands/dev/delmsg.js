@@ -1,3 +1,5 @@
+const configuration = require("../../config");
+
 class Command {
     constructor() {
         this.name = "delmsg";
@@ -22,7 +24,7 @@ class Command {
         return message.channel.messages.fetch(reply);
     }
     async invoke(message, args) {
-        if (message.author.id !== '462098932571308033') {
+        if (!configuration.permissions.delmsg.includes(message.author.id)) {
             this.reject(message);
             return;
         }

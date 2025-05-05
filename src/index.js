@@ -3,12 +3,7 @@ const discord = require("discord.js");
 
 const CommandUtility = new (require("./util/utility.js"))();
 const BaseEventHandler = require('./handleEvents.js');
-
-require('dotenv').config();
-const getBoolEnv = (env) => {
-    const value = process.env[env];
-    return String(value) === 'true';
-};
+const env = require("./util/env-util.js");
 
 const isInTestMode = process.argv[2] === 'test';
 if (isInTestMode) {
@@ -37,7 +32,7 @@ nodeprocess.on('uncaughtException', (err) => {
 });
 
 // add state stuff
-const prefix = isInTestMode ? process.env.PREFIX_TEST : process.env.PREFIX;
+const prefix = isInTestMode ? env.get("PREFIX_TEST") : env.get("PREFIX");
 const state = {
     commands: {},
     services: {}, // commands can add to this object themselves
@@ -45,12 +40,12 @@ const state = {
     prefix,
     isInTestMode,
     panelForcedDisabled: false,
-    preventRuntimeChanges: getBoolEnv('PREVENT_UPDATES')
+    preventRuntimeChanges: env.getBool('PREVENT_UPDATES')
 };
 CommandUtility.state = state;
 
 // login
-client.login(isInTestMode ? process.env.TEST_TOKEN : process.env.TOKEN).catch((e) => {
+client.login(isInTestMode ? env.get("TEST_TOKEN") : env.get("TOKEN")).catch((e) => {
     console.error('Login Error;', e);
     throw e; // we really only console.error to say where the error was
 });

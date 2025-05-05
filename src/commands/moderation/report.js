@@ -1,4 +1,5 @@
 const OptionType = require('../../util/optiontype');
+const configuration = require("../../config");
 
 class Command {
     constructor(client) {
@@ -67,7 +68,7 @@ class Command {
             });
         }
 
-        const adminReportChannel = this.client.channels.cache.get('1174360726765305987');
+        const adminReportChannel = this.client.channels.cache.get(configuration.channels.userReports);
         const user = message.options.getMember('user');
 
         const reason = message.options.getString('reason');

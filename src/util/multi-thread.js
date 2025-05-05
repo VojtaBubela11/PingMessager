@@ -1,9 +1,11 @@
 const path = require('path');
 const childProcess = require('child_process');
 
+const env = require("./env-util");
+
 // FYI, Canvas support is very rough with worker_threads for some reason. We use child_process to work around that.
 const runNewThread = (workerSrc, commandSrc, serializableData) => {
-    if (process.env.DISABLE_FORKING === 'true') {
+    if (env.getBool("DISABLE_FORKING")) {
         console.log("forking disabled, creating fake fork of ", workerSrc);
         const runWorker = require(workerSrc);
         return runWorker({ workerSrc, commandSrc, ...serializableData });

@@ -1,6 +1,8 @@
 const { MessageAttachment, Message } = require('discord.js');
 const Canvas = require('canvas');
+
 const OptionType = require('../../util/optiontype');
+const env = require("../../util/env-util");
 
 class Command {
     constructor() {
@@ -30,8 +32,8 @@ class Command {
             quoteText = referencedMessage.content;
             user = referencedMessage.author;
 
-            if (message.author.id !== process.env.OWNER && message.author.id !== user.id && util.interactionsBlocked(user.id)) {
-                return message.reply('The user you mentioned has interactions disabled. AKA don\'t want quotes of them dumdum');
+            if (message.author.id !== env.get("OWNER") && message.author.id !== user.id && util.interactionsBlocked(user.id)) {
+                return message.reply('The user you mentioned has interactions disabled.');
             }
 
             if (args.includes("bold" || args.includes("b"))) options.bold = true
